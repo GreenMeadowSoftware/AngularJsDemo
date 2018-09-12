@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hangman 2018!</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.min.js"></script>
+    <script src="app.js"></script>
+</head>
+<body ng-app="HangmanApp" ng-controller="GameController">
+    <p>
+        Incorrect: <span ng-repeat="letter in incorrectLetters">{{letter}} </span><br />
+        Correct: <span ng-repeat="letter in correctLetters">{{letter}} </span><br />
+        Word: {{displayWord}}<br />
+        Guesses left: {{maxTries - incorrectLetters.length}}<br />
+        Guess:
+        <input type="text" name="guess" ng-model="input.letter" maxlength="1" />
+        <button ng-click="guessLetter()">Guess</button>
+    </p>
+    
+    <p ng-Show="winner">WINNER!!!</p>
+
+    <p>
+        <button ng-click="newGame()">New Game</button>
+    </p>
+
+</body>
+</html>
