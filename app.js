@@ -1,9 +1,10 @@
 var app = angular.module('HangmanApp', [ /* No Dependencies */ ]);
 app.controller('GameController',
-    function($scope)
+    function($scope, $http)
     {
         var words = [ 'cobweb', 'plastic', 'magic', 'jacket', 'machine', 'meal', 'newspaper', 'dress', 'monkey', 'potato' ];
 
+        $scope.winners = [];
         $scope.incorrectLetters = [];
         $scope.correctLetters = [];
         $scope.maxTries = 10;
@@ -133,6 +134,13 @@ app.controller('GameController',
         }
 
         $scope.newGame();
+
+        // get some fake winners
+        $http.get('https://jsonplaceholder.typicode.com/users')
+            .then(function(response)
+            {
+                $scope.winners = response.data;
+            });
 
     }
 );
