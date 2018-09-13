@@ -33,11 +33,11 @@
         </div>
     </div>
 
-    <div class="c">
+    <div class="c" ng-show="winner !== true">
         <p>
             Guesses left: {{maxTries - incorrectLetters.length}}
         </p>
-        <div class="input-group">
+        <div class="input-group" ng-show="winner === null">
             <input type="text" name="guess" ng-model="input.letter" maxlength="1" class="form-control" placeholder="Guess a letter ..." />
             <span class="input-group-btn">
                 <button ng-click="guessLetter()" class="btn btn-success">Guess</button>
@@ -45,7 +45,27 @@
         </div>
     </div>
 
-    <p ng-Show="winner" class="c">WINNER!!!</p>
+    <div ng-show="winner">
+        <h2 class="c">You won! Congratulations!!</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Previous winners</th>
+                    <th>Guesses left</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>You!</td>
+                    <td>{{maxTries - incorrectLetters.length}}</td>
+                </tr>
+                <tr ng-repeat="previousWinner in winners">
+                    <td>{{previousWinner.username}}</td>
+                    <td>{{previousWinner.address.zipcode.split('')[0]}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
     <p class="c">
         <button ng-click="newGame()" class="btn btn-primary">New Game</button>
